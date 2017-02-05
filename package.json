@@ -4,7 +4,12 @@
   "description": "My first Facebook Messenger bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm-watch",
+    "eslint": "./node_modules/.bin/eslint *js"
+  },
+  "watch": {
+    "eslint": "*.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,5 +17,12 @@
     "body-parser": "^1.16.0",
     "express": "^4.14.1",
     "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "npm-watch": "^0.1.8"
   }
 }

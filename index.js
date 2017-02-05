@@ -28,18 +28,18 @@ app.get('/webhook/', (req, res) => {
 
 // Process messages
 app.post('/webhook/', (req, res) => {
-  const messaging_events = req.body.entry[0].messaging
-  messaging_events.forEach((event, i) => {
+  const messagingEvents = req.body.entry[0].messaging
+  messagingEvents.forEach((event, i) => {
     const sender = event.sender.id
     if (event.message && event.message.text) {
-      const text = event.message.text;
+      const text = event.message.text
       if (text.toLowerCase().indexOf('generic') > -1) {
-        send.genericMessage(sender);
+        send.genericMessage(sender)
       } else if (event.postback) {
-        const text = JSON.stringify(event.postback);
-        send.textMessage(sender, 'Postback received: ' + text.substring(0, 200), token);
+        const text = JSON.stringify(event.postback)
+        send.textMessage(sender, 'Postback received: ' + text.substring(0, 200), token)
       } else {
-        send.textMessage(sender, 'Text received, echo: ' + text.substring(0, 200));
+        send.textMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
       }
     }
   })
