@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 
 const send = require('./send')
+const thread = require('./thread')
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -13,6 +14,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // Process application/json
 app.use(bodyParser.json())
+
+// Thread Settings
+thread.addGreeting('Currency with currency')
 
 app.get('/', (req, res) => {
   res.send('Hello world, I am Doe Bot.')
