@@ -35,12 +35,11 @@ app.post('/webhook/', (req, res) => {
       const text = event.message.text;
       if (text.toLowerCase().indexOf('generic') > -1) {
         send.genericMessage(sender);
-      } else {
-        send.textMessage(sender, 'Text received, echo: ' + text.substring(0, 200));
-      }
-      if (event.postback) {
+      } else if (event.postback) {
         const text = JSON.stringify(event.postback);
         send.textMessage(sender, 'Postback received: ' + text.substring(0, 200), token);
+      } else {
+        send.textMessage(sender, 'Text received, echo: ' + text.substring(0, 200));
       }
     }
   })
