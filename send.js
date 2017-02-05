@@ -6,7 +6,7 @@ module.exports = {
   genericMessage
 };
 
-function textMessage = (sender, text) => {
+function textMessage (sender, text) {
   const messageData = {text: text};
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -22,7 +22,7 @@ function textMessage = (sender, text) => {
   })
 }
 
-function genericMessage = sender => {
+function genericMessage (sender) {
   const messageData = {
     "attachment": {
       "template_type": "generic",
