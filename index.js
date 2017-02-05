@@ -5,6 +5,8 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
 
+const sendTextMessage = require('sendTextMessage')
+
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -24,6 +26,21 @@ app.get('/webhook/', (req, res) => {
   }
   res.send('Error, wrong token')
 })
+
+// Process messages
+app.post('/webhook/', (req, res) => {
+  const messaging_events = req.body.entry[0].messaging
+  messaging_events.forEach((event, i) => {
+    const sender = event.sender.id
+    if (event.message && event.message.text) {
+      const text = event.message.text
+      sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
+    }
+  })
+  res.sendStatus(200)
+})
+
+const token = process.env.FB_PAGE_ACCESS_TOKEN
 
 // Spin up the server
 app.listen(app.get('port'), () => {
