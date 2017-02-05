@@ -35,9 +35,9 @@ app.post('/webhook/', (req, res) => {
       const text = event.message.text
       if (text.toLowerCase().indexOf('generic')) {
         send.genericMessage(sender);
-        continue;
+      } else {
+        send.textMessage(sender, 'Text received, echo: ' + text.substring(0, 200));
       }
-      send.textMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
     }
   })
   res.sendStatus(200)
