@@ -6,6 +6,7 @@ const app = express()
 
 const send = require('./send')
 const thread = require('./thread')
+const currency = require('./currency')
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -37,8 +38,10 @@ app.post('/webhook/', (req, res) => {
     const sender = event.sender.id
     if (event.message && event.message.text) {
       const text = event.message.text
-      if (text.toLowerCase().indexOf('generic') > -1) {
-        send.genericMessage(sender)
+      if (text.toLowerCase().indexOf('convert') > -1) {
+        currency.convert('USD', 'CAD', 5).then(res => {
+          send.textMessage(sender, 'Found: ' + res.quotes[`USDCAD`])
+        })
       } else if (event.postback) {
         const text = JSON.stringify(event.postback)
         send.textMessage(sender, 'Postback received: ' + text.substring(0, 200), token)
