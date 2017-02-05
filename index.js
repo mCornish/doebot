@@ -39,8 +39,8 @@ app.post('/webhook/', (req, res) => {
     if (event.message && event.message.text) {
       const text = event.message.text
       if (text.toLowerCase().indexOf('convert') > -1) {
-        currency.convert('USD', 'CAD', 5).then(res => {
-          send.textMessage(sender, 'Found: ' + res.quotes[`USDCAD`])
+        currency.convert('USD', 'CAD', 5, amount => {
+          send.textMessage(sender, 'CAD: ' + amount)
         })
       } else if (event.postback) {
         const text = JSON.stringify(event.postback)

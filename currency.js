@@ -16,14 +16,13 @@ function convert (from, to, amount, cb) {
     },
     method: 'POST'
   }
-    
+
   request(req)
   .on('response', res => {
     const newAmount = res.quotes[`USD${to}`]
     cb(newAmount)
   })
   .on('error', err => {
-    const error = err || res.body.error
-    if (error) console.log('Error sending messages: ', error)
+    console.log('Error fetching quotes: ', err)
   })
 }
