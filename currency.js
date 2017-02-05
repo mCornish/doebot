@@ -1,4 +1,4 @@
-const fetch = require('whatwg-fetch')
+require('whatwg-fetch')
 const key = process.env.CURRENCY_LAYER_KEY
 
 module.exports = {

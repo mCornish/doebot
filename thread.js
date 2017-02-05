@@ -1,4 +1,4 @@
-const fetch = require('whatwg-fetch')
+require('whatwg-fetch')
 const token = process.env.FB_PAGE_ACCESS_TOKEN
 
 module.exports = {
