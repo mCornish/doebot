@@ -2,10 +2,9 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const request = require('request')
 const app = express()
 
-const sendTextMessage = require('./sendTextMessage')
+const send = require('./send')
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -34,7 +33,11 @@ app.post('/webhook/', (req, res) => {
     const sender = event.sender.id
     if (event.message && event.message.text) {
       const text = event.message.text
-      sendTextMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
+      if (text.toLowerCase().indexOf('generic')) {
+        send.genericMessage(sender);
+        continue;
+      }
+      send.textMessage(sender, 'Text received, echo: ' + text.substring(0, 200))
     }
   })
   res.sendStatus(200)
