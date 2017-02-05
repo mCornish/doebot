@@ -1,4 +1,4 @@
-require('whatwg-fetch')
+const request = require('require')
 const token = process.env.FB_PAGE_ACCESS_TOKEN
 
 module.exports = {
@@ -6,16 +6,20 @@ module.exports = {
 }
 
 function addGreeting (text) {
-  const url = `https://graph.facebook.com/v2.6/me/thread_settings?access_token=${token}`
+  const url = 'https://graph.facebook.com/v2.6/me/thread_settings'
   const data = {
     'setting_type': 'greeting',
     'greeting': {
       text
     }
   }
-  const req = {
+  request({
+    url,
+    qs: {access_token: token},
     method: 'POST',
-    body: JSON.stringify(data)
-  }
-  fetch(url, req)
+    json: data
+  }, (err, res, body) => {
+    const error = err || res.body.error
+    if (error) console.log('Error sending messages: ', error)
+  })
 }

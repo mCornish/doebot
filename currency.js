@@ -1,4 +1,4 @@
-require('whatwg-fetch')
+const request = require('request')
 const key = process.env.CURRENCY_LAYER_KEY
 
 module.exports = {
@@ -6,14 +6,24 @@ module.exports = {
 }
 
 function convert (from, to, amount, cb) {
-  const currencyString = `currencies=${from},${to}`
-  const url = `http://apilayer.net/api/live?access_key=${key}&${currencyString}`
-
-  const promise = fetch(url)
-
-  if (cb) {
-    promise.then(cb)
+  const currencies = `${from},${to}`
+  const url = `http://apilayer.net/api/live?`
+  const req = {
+    url,
+    qs: {
+      access_key: key,
+      currencies
+    },
+    method: 'POST'
   }
-
-  return promise
+    
+  request(req)
+  .on('response', res => {
+    const newAmount = res.quotes[`USD${to}`]
+    cb(newAmount)
+  })
+  .on('error', err => {
+    const error = err || res.body.error
+    if (error) console.log('Error sending messages: ', error)
+  })
 }
