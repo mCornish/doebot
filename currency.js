@@ -20,8 +20,8 @@ function convert (from, to, amount, cb) {
 
   request(req)
   .on('response', res => {
-    console.log(res)
-    const newAmount = res.quotes[`USD${to}`]
+    console.log(res, res.toJSON())
+    const newAmount = res.body.quotes[`USD${to}`]
     cb(newAmount)
   })
   .on('error', err => {
