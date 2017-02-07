@@ -18,13 +18,12 @@ function convert (from, to, amount, cb) {
     json: true
   }
 
-  request(req)
-  .on('response', res => {
-    console.log(res, res.toJSON())
-    const newAmount = res.body.quotes[`USD${to}`]
+  request(req, (err, res, body) => {
+    console.log(body)
+    const newAmount = body.quotes[`USD${to}`]
     cb(newAmount)
   })
-  .on('error', err => {
-    console.log('Error fetching quotes: ', err)
-  })
+  // .on('error', err => {
+  //   console.log('Error fetching quotes: ', err)
+  // })
 }
