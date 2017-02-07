@@ -14,7 +14,8 @@ function convert (from, to, amount, cb) {
       access_key: key,
       currencies
     },
-    method: 'POST'
+    method: 'POST',
+    json: true
   }
 
   request(req)
