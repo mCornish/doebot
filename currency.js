@@ -20,11 +20,9 @@ function convert (from, to, amount, cb) {
 
   request(req)
   .on('response', res => {
-    res.on('data', data => {
-      console.log(data)
-      const newAmount = data.quotes[`USD${to}`]
-      cb(newAmount)
-    })
+    console.log(res)
+    const newAmount = res.quotes[`USD${to}`]
+    cb(newAmount)
   })
   .on('error', err => {
     console.log('Error fetching quotes: ', err)
