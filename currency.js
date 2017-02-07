@@ -19,7 +19,8 @@ function convert (from, to, amount, cb) {
 
   request(req)
   .on('response', res => {
-    const newAmount = res.quotes[`USD${to}`]
+    console.log(res)
+    const newAmount = res.data.quotes[`USD${to}`]
     cb(newAmount)
   })
   .on('error', err => {
