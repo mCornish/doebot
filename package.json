@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm-watch",
-    "eslint": "./node_modules/.bin/eslint *js"
+    "eslint": "./node_modules/.bin/eslint *js",
+    "server": "env FB_PAGE_ACCESS_TOKEN=EAADrTAvLFdcBALaxZAbZCp4NoW1IFXqZCBGZBIZA2iB9Qx8e5XyfufIFuAuUNWnzWIxnBa9FtR3qoPTajV8ZBk2HBCh2i2qO1TUZBSpFwEqvp534RuWfVLtWksmEFDFwHXFkm795nZBGVZA4bHYO3veGU9X6afqqsfXIOJlKR1CYPYQZDZD CURRENCY_LAYER_KEY=df98426695c475346b044b3b3c552b3d node index.js"
   },
   "watch": {
     "eslint": "*.js"
@@ -16,7 +17,9 @@
   "dependencies": {
     "body-parser": "^1.16.0",
     "express": "^4.14.1",
+    "lodash": "^4.17.4",
     "request": "^2.79.0",
+    "store": "^1.3.20",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
